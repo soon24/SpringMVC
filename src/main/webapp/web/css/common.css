@@ -1,0 +1,167 @@
+<style type="text/css">
+
+html { width:100%; height:100% }
+
+body {
+    line-height: 140%; /* 행간 */
+    color: #555;  /* 폰트 컬러 */    
+    margin: 0px;
+    padding: 0px;       
+    background:#FFFFFF;
+    font:normal 12px dotum,'돋움',Apple-Gothic,맑은 고딕, Malgun Gothic,sans-serif;
+    height:100%;              
+}
+
+a:link							{ color: #666; text-decoration: none; }
+a:hover							{ color: #666; text-decoration: none; }
+a:visited                      	{ color: #666; text-decoration: none; }
+a:active                       	{ color: #666; text-decoration: none; }
+
+a.glinks:link					{ color: #3da268; text-decoration: none; }
+a.glinks:hover					{ color: #666; text-decoration: none; }
+a.glinks:visited				{ color: #3da268; text-decoration: none; }
+a.glinks:active					{ color: #666; text-decoration: none; }
+
+.glink a:link					{ color: #3da268; text-decoration: none; }
+.glink a:hover					{ color: #666; text-decoration: none; }
+.glink a:visited				{ color: #3da268; text-decoration: none; }
+.glink a:active					{ color: #666; text-decoration: none; }
+
+form, fieldset, p, div, dl, dt, dd, h1, h2, h3, h4, h5, h6  { margin: 0px; padding: 0px; }
+ul, ol, li                     	{ margin: 0; padding: 0; list-style: none; }
+img, input.type-image   		{ border: none; }
+hr                     	     	{ display: none; }
+table                          	{ width: 100%; border-collapse: collapse; padding:0px; margin:0px}
+textarea                        { background: #fff; border: 1px solid #BCBEC0; font-size: 12px }
+input.type-text 				{ line-height:20px; height:17px; vertical-align:middle; border:1px #BCBEC0 solid; font-size:12px; }
+input.type-file           		{ height: 20px; padding: 0px 0px 1px 0px; font-size: 1.0em; border: 1px solid #BCBEC0;background: #fff; }
+input.type-file1             	{ height: 20px; padding: 0px 0px 1px 0px; font-size: 1.0em; border: 1px solid #BCBEC0;background: #fff; }
+
+
+/******************************************************************
+    작성화면
+*******************************************************************/
+div.data_write {
+    width: 100%;
+    margin: 0px 0 15px;    
+    overflow: hidden;
+}
+
+div.data_write table{
+	border-bottom: #87AFCB 1px solid;
+    border-top: #87AFCB 2px solid;		
+	border-collapse: collapse;	
+	border-spacing:0px;
+	width:100%;
+}
+
+div.data_write table th{
+	border-top: #87AFCB 0px solid;
+	border-bottom: #87AFCB 0px solid;
+	padding:0px 10px 0px 0px;
+	font-size:0.9em;	
+	color:#333333;
+	font-weight:none;
+	height:30px;
+	background:#F2F2F2;
+	text-align:right;		
+}
+div.data_write table td{
+	border-top: #D6D6D6 0px solid;
+	border-left: #D6D6D6 0px solid;
+	border-right: #D6D6D6 0px solid;
+	border-bottom: #D6D6D6 0px solid;	
+	padding-left:5px;
+	height:30px;
+}
+
+div.data_write table.write_table{
+	border-top: #87AFCB 0px solid;
+	border-bottom: #87AFCB 1px solid;	
+}
+div.data_write table.write_table th{
+	border-top: #87AFCB 0px solid;
+	border-left: #87AFCB 0px solid;
+	border-right: #87AFCB 0px solid;
+	border-bottom: #87AFCB 1px solid;
+	padding:0px 10px 0px 0px;
+	font-size:1.0em;	
+	color:#333333;
+	font-weight:none;
+	height:30px;
+	background:#F2F2F2;
+	text-align:right;		
+}
+
+div.data_write table.write_table p{
+	width:100%;
+	border-right: #87AFCB 0px solid;
+	margin: 0px 0px 0px 0px;
+}
+
+
+div.data_write table span{
+	width:100%;
+	border-bottom: #87AFCB 1px solid;		
+	padding:0px 0px 0px 0px;
+}
+
+div.data_write table p{
+	width:100%;
+	border-right: #87AFCB 1px solid;
+	margin: 0px 0px 0px 8px;	
+}
+
+div.data_write div.view_title {
+    border-top: 1px solid #e5e5e5;
+    padding: 6px 14px;
+    font-weight: bold;
+    color: #297266;
+    background: url("../images/board_th_bg.gif") repeat-x left bottom;
+}
+div.data_write div.write_etc {
+    width: 100%;
+    overflow: hidden;
+    margin-top:20px;
+    padding: 5px 0;
+    font-size: 0.95em;
+    border-bottom: 5px solid #d2d2d2;
+}
+
+div.data_write div.write_etc span.notice {
+    padding: 0 14px;
+    float: right;
+}
+div.data_write div.write_etc span.lefttitle {
+    font-weight: bold;
+    font-size:2em;
+    color:#588FB5;	
+}
+
+div.data_write table.view_table th{
+	border-top: #87AFCB 1px solid;
+	border-bottom: #87AFCB 1px solid;
+	padding:0px 10px 0px 0px;
+	font-size:1.0em;	
+	color:#333333;
+	font-weight:none;
+	height:30px;
+	background:#F2F2F2;
+	text-align:right;
+}
+div.data_write table.view_table td{
+	border-top: #D6D6D6 1px solid;
+	border-left: #D6D6D6 0px solid;
+	border-right: #D6D6D6 0px solid;
+	border-bottom: #D6D6D6 1px solid;	
+	padding-left:10px;
+	height:30px;
+}
+
+.button{
+	margin:10px;
+}
+</style>
+
+
+

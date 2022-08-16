@@ -12,16 +12,60 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
+	<!-- oracle config.properties 추가 S -->
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="location" value="/resources/config/config.properties"/>
+        <beans:property name="fileEncoding" value="UTF-8" />
+    </beans:bean>
+	<!-- oracle config.properties 추가 E -->
+	
+	<!-- oracle 추가 S -->
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<beans:property name="url" value="${db.url}" />
+		<beans:property name="username" value="${db.username}" />
+		<beans:property name="password" value="${db.password}" />
+        <beans:property name="initialSize" value="5"/>
+        <beans:property name="maxActive" value="20"/>
+        <beans:property name="minIdle" value="0"/>
+        <beans:property name="maxWait" value="1000"/>
+		<beans:property name="poolPreparedStatements" value="true"/>
+        <beans:property name="maxOpenPreparedStatements" value="50"/>                
+		<!-- 특정 시간마다 validationQuery를 실행 셋팅 S -->
+        <beans:property name="validationQuery" value="select 1 from dual"/>        
+        <beans:property name="testWhileIdle" value="true"/>
+        <beans:property name="timeBetweenEvictionRunsMillis" value="60000"/>
+   		<!-- 특정 시간마다 validationQuery를 실행 셋팅 E -->        
+    </beans:bean>
+	<!-- oracle 추가 E -->
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/web/**" location="/web/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<context:component-scan base-package="com.my.app" />
+
+	<!-- transaction manager 추가 S -->
+    <beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>
+
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <beans:property name="dataSource" ref="dataSource" />
+	    <beans:property name="configLocation"  value="classpath:mybatis-config.xml"/>
+	    <beans:property name="mapperLocations" value="classpath:mappers/**/*.xml"/>
+	</beans:bean>
+
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/> 
+	</beans:bean>	
+	<!-- transaction manager 추가 E -->
+		
+	<context:component-scan base-package="com.my.*" />
 	
 	
 	
