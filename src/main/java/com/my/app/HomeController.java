@@ -8,8 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.my.app.service.BoardVO;
 
 /**
  * Handles requests for the application home page.
@@ -34,6 +37,19 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+
+	@RequestMapping("/boardWrite")
+	public String boardWrite() {
+		
+		return "board/boardWrite";
+	}
+	
+	
+	@RequestMapping("/boardList") 
+	public String selectBoardList(BoardVO vo, ModelMap model) throws Exception {
+	  
+		return "board/boardList"; 
 	}
 	
 }
