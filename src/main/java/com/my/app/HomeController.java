@@ -3,6 +3,7 @@ package com.my.app;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -102,7 +103,38 @@ public class HomeController {
 	
 	@RequestMapping("/boardList") 
 	public String selectBoardList(BoardVO vo, ModelMap model) throws Exception {
+
+		int unit = 5;
+		int total = 0;
+
+		try {
+			total = boardDAO.selectBoardTotal(vo);
+			
+		} catch(Exception e1) {
+		}
 	  
+		int totalPage = (int) Math.ceil((double)total/unit);
+
+		int viewPage = vo.getViewPage();
+		
+		if (viewPage > totalPage || viewPage < 1) {
+			viewPage = 1;
+		}
+
+		int startIndex = (viewPage - 1) * unit + 1;
+		int endIndex = startIndex + (unit - 1);
+
+		int startRowNo = total - (viewPage-1)*unit;
+		
+		vo.setStartIndex(startIndex);
+		vo.setEndIndex(endIndex);
+		
+		List<?> list = boardDAO.selectBoardList(model);
+		model.addAttribute("rowNumber", startRowNo);
+		model.addAttribute("total", total);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("resultList", list);
+		
 		return "board/boardList"; 
 	}
 	 	

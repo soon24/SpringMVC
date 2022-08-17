@@ -12,4 +12,25 @@
 		 								 
 	</insert>
 	
+	<select id="selectBoardList" resultType="hashMap" parameterType="java.util.Map">
+		select b.* from (
+				select rownum rn, a.* from (
+					select unq,
+							title,
+							name,
+							hits,
+							to_char(rdate,'yyyy-mm-dd') rdate
+					from board
+						order by unq desc) a) b
+	</select>
+	
+	<select id="selectBoardTotal" resultType="integer" parameterType="java.util.Map">
+		SELECT count(*) FROM BOARD                 
+		<choose>
+	        <when test="searchGubun != '' and searchText != ''">
+					where #{searchGubun} like #{searchText}
+		    </when>
+		</choose>
+	</select>
+	
  </mapper>

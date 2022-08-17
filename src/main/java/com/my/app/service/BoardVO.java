@@ -14,11 +14,27 @@ public class BoardVO {
 	private int viewPage = 1;
 	public int startIndex = 1;
 	public int endIndex = 10;
+	
+	private String searchGubun;
+	private String searchText;
+	
 	public int getUnq() {
 		return unq;
 	}
 	public void setUnq(int unq) {
 		this.unq = unq;
+	}
+	public String getSearchGubun() {
+		return searchGubun;
+	}
+	public void setSearchGubun(String searchGubun) {
+		this.searchGubun = searchGubun;
+	}
+	public String getSearchText() {
+		return searchText;
+	}
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
 	}
 	public String getTitle() {
 		return title;

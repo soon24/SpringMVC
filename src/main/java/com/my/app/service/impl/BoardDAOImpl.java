@@ -1,5 +1,8 @@
 package com.my.app.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +54,18 @@ public class BoardDAOImpl implements BoardDAO {
            	transactionManager.rollback(status);                    
             return 9;
         }
+	}
+
+	@Override
+	public List<?> selectBoardList(Map<String, Object> paramMap) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("BoardSpace.selectBoardList", paramMap);
+	}
+
+	@Override
+	public int selectBoardTotal(BoardVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("BoardSpace.selectBoardTotal", vo);
 	}
 
 }
