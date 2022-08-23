@@ -110,7 +110,15 @@ public class HomeController {
 	@RequestMapping("/boardList") 
 	public String selectBoardList(SearchVO searchVO, ModelMap model) throws Exception {
 
+		
 		searchVO.pageCalculate(boardDAOImpl.selectBoardTotal(searchVO));
+		String sType = searchVO.getSearchType();
+		String sKey = searchVO.getSearchKeyword();
+		int iTot = searchVO.getTotRow();
+		System.out.println("sType ========> "+sType);
+		System.out.println("sKey ========> "+sKey);
+		System.out.println("iTot ========> "+iTot);
+		
 		
 		List<?> listview = boardDAOImpl.selectBoardList(searchVO);
 		

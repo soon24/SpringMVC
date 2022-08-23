@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn"	uri="http://java.sun.com/jsp/jstl/functions"%>
     
 <!DOCTYPE html>
 <html>
@@ -12,6 +11,7 @@
 <title>BOARD LIST</title>
 <script src="/app/web/js/jquery-3.3.1.js"></script>
 <script src="/app/web/js/jquery-ui.min.js"></script>
+<script src="/app/web/js/dynatree/jquery.dynatree.js"></script>
 <script>
 function fn_formSubmit(){
 	document.searchFrm.submit();	
@@ -74,19 +74,6 @@ caption {
 <!-- 번호, 제목, 글쓴이, 등록일, 조회수 -->
 <div class="div1">일반게시판 목록</div>
 <div class="div2">Total : ${searchVO.totRow }</div>
-<div class="div2">
-
-<form name="searchFrm" id="searchFrm" method="post">
-	<select name="searchType" id="searchType">
-		<option value="title">제목</option>
-		<option value="name">글쓴이</option>
-		<option value="content">내용</option>
-	</select>
-	<input type="text" name="searchKeyword" id="searchKeyword">
-	<button type="submit">검색</button>
-</form>
-
-</div>
 
 <table>
 	<tr>
@@ -100,7 +87,6 @@ caption {
 	<c:set var="cnt" value="${searchVO.totRow }"/>
 	
 	<c:forEach var="result" items="${listview}" varStatus="status">	
-	<%-- <c:forEach var="result" items="${resultList }"> --%>	
 	
 	<tr align="center">
 		<td><c:out value="${cnt }" /></td>
@@ -117,16 +103,31 @@ caption {
 	</c:forEach>
 
 </table>
-
-<div style="width:600px;margin-top:5px; text-align:center; ">
-	<c:forEach var="i" begin="1" end="${totalPage }">
-		<a href="boardList.do?viewPage=${i }">${i }</a> 
-	</c:forEach>
-
+<div class="div2">
+<form name="searchFrm" id="searchFrm" method="post">
+	<div style="width:600px;margin-top:5px; text-align:left; ">
+		<jsp:include page="/WEB-INF/views/common/pagingforSubmit.jsp" />
+	</div>
+	<!-- <select name="searchType" id="searchType">
+		<option value="title">제목</option>
+		<option value="name">글쓴이</option>
+		<option value="content">내용</option>
+	</select>
+	<input type="text" name="searchKeyword" id="searchKeyword">
+	<button type="submit">검색</button> -->
+	<div>
+		<input type="checkbox" name="searchType" value="title" <c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">checked="checked"</c:if>/>
+		<label class="chkselect" for="searchType1">제목</label>
+		<input type="checkbox" name="searchType" value="name" <c:if test="${fn:indexOf(searchVO.searchType, 'name')!=-1}">checked="checked"</c:if>/>
+		<label class="chkselect" for="searchType2">글쓴이</label>
+		<input type="text" name="searchKeyword" style="width:150px;" maxlength="50" value='<c:out value="${searchVO.searchKeyword}"/>' onkeydown="if(event.keyCode == 13) { fn_formSubmit();}">
+		<input name="btn_search" value="검색" type="button" onclick="fn_formSubmit()" />
+		
+		<button type="button" onclick="location='boardWrite.do'">글쓰기</button>
+	</div>
+	
+ </form>
 </div>
 
-<div style="width:600px;margin-top:5px; text-align:right">
-	<button type="button" onclick="location='boardWrite.do'">글쓰기</button>
-</div>
 </body>
 </html>
