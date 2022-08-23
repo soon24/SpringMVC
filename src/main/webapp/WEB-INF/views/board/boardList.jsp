@@ -108,13 +108,6 @@ caption {
 	<div style="width:600px;margin-top:5px; text-align:left; ">
 		<jsp:include page="/WEB-INF/views/common/pagingforSubmit.jsp" />
 	</div>
-	<!-- <select name="searchType" id="searchType">
-		<option value="title">제목</option>
-		<option value="name">글쓴이</option>
-		<option value="content">내용</option>
-	</select>
-	<input type="text" name="searchKeyword" id="searchKeyword">
-	<button type="submit">검색</button> -->
 	<div>
 		<input type="checkbox" name="searchType" value="title" <c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">checked="checked"</c:if>/>
 		<label class="chkselect" for="searchType1">제목</label>

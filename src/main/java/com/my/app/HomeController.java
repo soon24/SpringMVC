@@ -124,6 +124,9 @@ public class HomeController {
 		
 		model.addAttribute("listview", listview);
 		model.addAttribute("searchVO", searchVO);
+		System.out.println("sType2 ========> "+sType);
+		System.out.println("sKey2 ========> "+sKey);
+		System.out.println("iTot2 ========> "+iTot);
 		
 		return "board/boardList"; 
 	}
