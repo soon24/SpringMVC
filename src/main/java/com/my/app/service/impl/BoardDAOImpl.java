@@ -12,6 +12,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.my.app.service.BoardVO;
+import com.my.app.service.SearchVO;
 
 public class BoardDAOImpl implements BoardDAO {
 	private static final Logger logger = LoggerFactory.getLogger(BoardDAOImpl.class);			
@@ -57,15 +58,19 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<?> selectBoardList(Map<String, Object> paramMap) throws Exception {
+	public int selectBoardTotal(SearchVO param) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("BoardSpace.selectBoardList", paramMap);
+		int resInt = 0;
+		if (sqlSession.selectOne("BoardSpace.selectBoardTotal", param) != null) {
+			resInt = sqlSession.selectOne("BoardSpace.selectBoardTotal", param);
+		}
+		return resInt;
 	}
 
 	@Override
-	public int selectBoardTotal(BoardVO vo) throws Exception {
+	public List<?> selectBoardList(SearchVO param) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("BoardSpace.selectBoardTotal", vo);
+		return sqlSession.selectList("BoardSpace.selectBoardList", param);
 	}
 
 }

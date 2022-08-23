@@ -9,32 +9,11 @@ public class BoardVO {
 	private int hits;
 	private String rdate;
 	
-	// Controller에서 사용하는 변수 값 정의. 
-	// controller에서 사용하는 변수 명과 동일해야 한다.
-	private int viewPage = 1;
-	public int startIndex = 1;
-	public int endIndex = 10;
-	
-	private String searchGubun;
-	private String searchText;
-	
 	public int getUnq() {
 		return unq;
 	}
 	public void setUnq(int unq) {
 		this.unq = unq;
-	}
-	public String getSearchGubun() {
-		return searchGubun;
-	}
-	public void setSearchGubun(String searchGubun) {
-		this.searchGubun = searchGubun;
-	}
-	public String getSearchText() {
-		return searchText;
-	}
-	public void setSearchText(String searchText) {
-		this.searchText = searchText;
 	}
 	public String getTitle() {
 		return title;
@@ -71,24 +50,6 @@ public class BoardVO {
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
-	}
-	public int getViewPage() {
-		return viewPage;
-	}
-	public void setViewPage(int viewPage) {
-		this.viewPage = viewPage;
-	}
-	public int getStartIndex() {
-		return startIndex;
-	}
-	public void setStartIndex(int startIndex) {
-		this.startIndex = startIndex;
-	}
-	public int getEndIndex() {
-		return endIndex;
-	}
-	public void setEndIndex(int endIndex) {
-		this.endIndex = endIndex;
 	}
 
 }

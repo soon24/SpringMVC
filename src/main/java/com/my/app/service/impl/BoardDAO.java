@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.my.app.service.BoardVO;
+import com.my.app.service.SearchVO;
 
 public interface BoardDAO {
 	
 	public int insertBoard(BoardVO vo) throws Exception;
 	
-	public List<?> selectBoardList(Map<String, Object> paramMap) throws Exception;
+	public List<?> selectBoardList(SearchVO param) throws Exception;
 	
-	public int selectBoardTotal(BoardVO vo) throws Exception;
+	public int selectBoardTotal(SearchVO param) throws Exception;
 
 }

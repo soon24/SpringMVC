@@ -9,7 +9,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BOARD LIST</title>
+<script src="/app/web/js/jquery-3.3.1.js"></script>
+<script src="/app/web/js/jquery-ui.min.js"></script>
+<script>
+function fn_formSubmit(){
+	document.searchFrm.submit();	
+}
+</script>
+
 </head>
 <style>
 body{
@@ -65,16 +73,16 @@ caption {
 
 <!-- 번호, 제목, 글쓴이, 등록일, 조회수 -->
 <div class="div1">일반게시판 목록</div>
-<div class="div2">Total : ${total }</div>
+<div class="div2">Total : ${searchVO.totRow }</div>
 <div class="div2">
 
-<form name="searchFrm" method="post" action="boardList.do">
-	<select name="searchGubun" id="searchGubun">
+<form name="searchFrm" id="searchFrm" method="post">
+	<select name="searchType" id="searchType">
 		<option value="title">제목</option>
 		<option value="name">글쓴이</option>
 		<option value="content">내용</option>
 	</select>
-	<input type="text" name="searchText" id="searchText">
+	<input type="text" name="searchKeyword" id="searchKeyword">
 	<button type="submit">검색</button>
 </form>
 
@@ -89,9 +97,10 @@ caption {
 		<th width="15%">조회수</th>
 	</tr>
 	
-	<c:set var="cnt" value="${rowNumber }"/>
+	<c:set var="cnt" value="${searchVO.totRow }"/>
 	
-	<c:forEach var="result" items="${resultList }">	
+	<c:forEach var="result" items="${listview}" varStatus="status">	
+	<%-- <c:forEach var="result" items="${resultList }"> --%>	
 	
 	<tr align="center">
 		<td><c:out value="${cnt }" /></td>
