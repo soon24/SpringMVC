@@ -12,14 +12,14 @@
 		 								 
 	</insert>
 
-	<select id="selectBoardTotal" resultType="integer" parameterType="BoardVO">
+	<select id="selectBoardTotal" resultType="integer" parameterType="SearchVO">
 		SELECT count(*) FROM BOARD                 
-		<if test="searchKeyword!= null and searchKeyword!='' and searchType!=null and searchType!=''">
-	        WHERE #{searchGubun} LIKE '%' || #{searchKeyword} || '%'
+		<if test="searchType!= null and searchType!='' and searchType!=null and searchType!=''">
+	        WHERE #{searchType} LIKE '%' || #{searchKeyword} || '%'
 		</if>
 	</select>
 	
-	<select id="selectBoardList" resultType="BoardVO" parameterType="BoardVO">
+	<select id="selectBoardList" resultType="BoardVO" parameterType="SearchVO">
 		SELECT B.* FROM (
 				SELECT ROWNUM RN, A.* FROM (
 					SELECT UNQ,
@@ -28,7 +28,11 @@
 							HITS,
 							TO_CHAR(RDATE,'YYYY-MM-DD') RDATE
 					FROM BOARD
+					<if test="searchType!= null and searchType!='' and searchType!=null and searchType!=''">
+				        WHERE #{searchType} LIKE '%' || #{searchKeyword} || '%'
+					</if>
 						ORDER BY UNQ DESC) A) B
+					WHERE RN BETWEEN #{rowStart} AND #{rowEnd}						
 	</select>
 	
  </mapper>

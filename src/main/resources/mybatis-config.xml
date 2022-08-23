@@ -5,6 +5,8 @@
 
 	<typeAliases>
 		<typeAlias  alias="BoardVO" type="com.my.app.service.BoardVO"/>
+		<typeAlias  alias="SearchVO" type="com.my.app.service.SearchVO"/>
+		<typeAlias  alias="PageVO" type="com.my.app.service.PageVO"/>
 	</typeAliases>
     
 </configuration>
