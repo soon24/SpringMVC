@@ -34,8 +34,6 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	//@Inject
-	//BoardDAO boardDAO;
 	@Autowired
 	private BoardDAOImpl boardDAOImpl;
 	
@@ -112,22 +110,11 @@ public class HomeController {
 
 		
 		searchVO.pageCalculate(boardDAOImpl.selectBoardTotal(searchVO));
-		String sType = searchVO.getSearchType();
-		String sKey = searchVO.getSearchKeyword();
-		int iTot = searchVO.getTotRow();
-		System.out.println("sType ========> "+sType);
-		System.out.println("sKey ========> "+sKey);
-		System.out.println("iTot ========> "+iTot);
-		
-		
+
 		List<?> listview = boardDAOImpl.selectBoardList(searchVO);
 		
 		model.addAttribute("listview", listview);
 		model.addAttribute("searchVO", searchVO);
-		System.out.println("sType2 ========> "+sType);
-		System.out.println("sKey2 ========> "+sKey);
-		System.out.println("iTot2 ========> "+iTot);
-		
 		return "board/boardList"; 
 	}
 	 	

@@ -8,17 +8,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BOARD LIST</title>
-<script src="/app/web/js/jquery-3.3.1.js"></script>
-<script src="/app/web/js/jquery-ui.min.js"></script>
-<script src="/app/web/js/dynatree/jquery.dynatree.js"></script>
-<script>
-function fn_formSubmit(){
-	document.searchFrm.submit();	
-}
-</script>
-
-</head>
 <style>
 body{
 	font-size:9pt;
@@ -66,8 +55,19 @@ caption {
 	width:120px;
 	font-size:9pt;
 }
-
 </style>
+
+<title>BOARD LIST</title>
+<script src="/app/web/js/jquery-3.3.1.js"></script>
+<script src="/app/web/js/jquery-ui.min.js"></script>
+<script src="/app/web/js/dynatree/jquery.dynatree.js"></script>
+<script>
+function fn_formSubmit(){
+	document.searchFrm.submit();	
+}
+</script>
+
+</head>
 
 <body>
 
@@ -109,13 +109,14 @@ caption {
 		<jsp:include page="/WEB-INF/views/common/pagingforSubmit.jsp" />
 	</div>
 	<div>
-		<input type="checkbox" name="searchType" value="title" <c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">checked="checked"</c:if>/>
-		<label class="chkselect" for="searchType1">제목</label>
-		<input type="checkbox" name="searchType" value="name" <c:if test="${fn:indexOf(searchVO.searchType, 'name')!=-1}">checked="checked"</c:if>/>
-		<label class="chkselect" for="searchType2">글쓴이</label>
-		<input type="text" name="searchKeyword" style="width:150px;" maxlength="50" value='<c:out value="${searchVO.searchKeyword}"/>' onkeydown="if(event.keyCode == 13) { fn_formSubmit();}">
+		<select name="searchType" id="searchType">
+			<option value="title">제목</option>
+			<option value="name">글쓴이</option>
+			<option value="content">내용</option>
+		</select>
+		<input type="text" name="searchKeyword" value='<c:out value="${searchVO.searchKeyword}"/>' onkeydown="if(event.keyCode == 13) { fn_formSubmit();}">	
 		<input name="btn_search" value="검색" type="button" onclick="fn_formSubmit()" />
-		
+
 		<button type="button" onclick="location='boardWrite.do'">글쓰기</button>
 	</div>
 	
