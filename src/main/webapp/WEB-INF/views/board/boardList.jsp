@@ -88,7 +88,9 @@ function fn_formSubmit(){
 	
 	<c:forEach var="result" items="${listview}" varStatus="status">	
 		<tr align="center">
-			<td><c:out value="${cnt }" /></td>
+			<td>
+				<c:out value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}"/>					
+			</td>
 			<td align="left">
 				<a href="boardDetail.do?unq=${result.unq }"><c:out value="${result.title }"/></a>
 			</td>
