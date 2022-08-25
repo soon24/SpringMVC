@@ -87,19 +87,16 @@ function fn_formSubmit(){
 	<c:set var="cnt" value="${searchVO.totRow }"/>
 	
 	<c:forEach var="result" items="${listview}" varStatus="status">	
-	
-	<tr align="center">
-		<td><c:out value="${cnt }" /></td>
-		<td align="left">
-			<a href="boardDetail.do?unq=${result.unq }"><c:out value="${result.title }"/></a>
-		</td>
-		<td><c:out value="${result.name }" /></td>
-		<td><c:out value="${result.rdate }" /></td>
-		<td><c:out value="${result.hits }" /></td>
-	</tr>
-		
+		<tr align="center">
+			<td><c:out value="${cnt }" /></td>
+			<td align="left">
+				<a href="boardDetail.do?unq=${result.unq }"><c:out value="${result.title }"/></a>
+			</td>
+			<td><c:out value="${result.name }" /></td>
+			<td><c:out value="${result.rdate }" /></td>
+			<td><c:out value="${result.hits }" /></td>
+		</tr>
 		<c:set var="cnt" value="${cnt - 1 }"/>
-		
 	</c:forEach>
 
 </table>

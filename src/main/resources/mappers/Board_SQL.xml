@@ -14,7 +14,7 @@
 
 	<select id="selectBoardTotal" resultType="integer" parameterType="SearchVO">
 		SELECT count(*) FROM BOARD                 
-		<if test="searchType!= null and searchType!='' and searchType!=null and searchType!=''">
+		<if test="searchKeyword!= null and searchKeyword!='' and searchType!=''">
 	        WHERE #{searchType} LIKE '%' || #{searchKeyword} || '%'
 		</if>
 	</select>
@@ -28,7 +28,7 @@
 							HITS,
 							TO_CHAR(RDATE,'YYYY-MM-DD') RDATE
 					FROM BOARD
-					<if test="searchType!= null and searchType!='' and searchType!=null and searchType!=''">
+					<if test="searchKeyword!= null and searchKeyword!='' and searchType!=''">
 				        WHERE #{searchType} LIKE '%' || #{searchKeyword} || '%'
 					</if>
 						ORDER BY UNQ DESC) A) B
