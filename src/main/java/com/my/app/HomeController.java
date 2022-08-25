@@ -5,9 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -20,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.my.app.comm.ComUtils;
 import com.my.app.service.BoardVO;
 import com.my.app.service.SearchVO;
-import com.my.app.service.impl.BoardDAO;
 import com.my.app.service.impl.BoardDAOImpl;
 
 /**
@@ -110,7 +106,10 @@ public class HomeController {
 
 		
 		searchVO.pageCalculate(boardDAOImpl.selectBoardTotal(searchVO));
-
+		
+		int resCnt = searchVO.getTotRow();
+		System.out.println("searchVO.getTotRow() =====> "+resCnt);
+		
 		List<?> listview = boardDAOImpl.selectBoardList(searchVO);
 		
 		model.addAttribute("listview", listview);
