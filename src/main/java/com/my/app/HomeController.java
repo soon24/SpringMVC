@@ -107,8 +107,8 @@ public class HomeController {
 		
 		searchVO.pageCalculate(boardDAOImpl.selectBoardTotal(searchVO));
 		
-		int resCnt = searchVO.getTotRow();
-		System.out.println("searchVO.getTotRow() =====> "+resCnt);
+		//int resCnt = searchVO.getTotRow();
+		//System.out.println("searchVO.getTotRow() =====> "+resCnt);
 		
 		List<?> listview = boardDAOImpl.selectBoardList(searchVO);
 		

@@ -109,13 +109,12 @@ function fn_formSubmit(){
 	</div>
 	<div>
 		<select name="searchType" id="searchType">
-			<option value="title">제목</option>
-			<option value="name">글쓴이</option>
-			<option value="content">내용</option>
+			<option value="title" <c:if test="${fn:indexOf(searchVO.searchType, 'title')!=-1}">selected</c:if>>제목</option>
+			<option value="name" <c:if test="${fn:indexOf(searchVO.searchType, 'name')!=-1}">selected</c:if>>글쓴이</option>
+			<option value="content" <c:if test="${fn:indexOf(searchVO.searchType, 'content')!=-1}">selected</c:if>>내용</option>
 		</select>
 		<input type="text" name="searchKeyword" value='<c:out value="${searchVO.searchKeyword}"/>' onkeydown="if(event.keyCode == 13) { fn_formSubmit();}">	
 		<input name="btn_search" value="검색" type="button" onclick="fn_formSubmit()" />
-
 		<button type="button" onclick="location='boardWrite.do'">글쓰기</button>
 	</div>
 	

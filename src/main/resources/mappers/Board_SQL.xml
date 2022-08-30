@@ -15,7 +15,7 @@
 	<select id="selectBoardTotal" resultType="integer" parameterType="SearchVO">
 		SELECT count(*) FROM BOARD                 
 		<if test="searchKeyword!= null and searchKeyword!='' and searchType!=''">
-	        WHERE #{searchType} LIKE '%' || #{searchKeyword} || '%'
+	        WHERE ${searchType} LIKE '%' || #{searchKeyword} || '%'
 		</if>
 	</select>
 	
@@ -29,7 +29,7 @@
 							TO_CHAR(RDATE,'YYYY-MM-DD') RDATE
 					FROM BOARD
 					<if test="searchKeyword!= null and searchKeyword!='' and searchType!=''">
-				        WHERE #{searchType} LIKE '%' || #{searchKeyword} || '%'
+				        WHERE ${searchType} LIKE '%' || #{searchKeyword} || '%'
 					</if>
 						ORDER BY UNQ DESC) A) B
 					WHERE RN BETWEEN #{rowStart} AND #{rowEnd}						
