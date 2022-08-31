@@ -2,21 +2,15 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fn"      uri="http://java.sun.com/jsp/jstl/functions" %>    
 
-<% pageContext.setAttribute("newline", "\n"); %>
-<c:set var="content" value="${fn:replace(boardVO.content,newline,'<br>') }"/>
-
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 상세 화면</title>
+<title>게시판 등록 화면</title>
 
 <script src="/app/web/js/jquery-3.3.1.js"></script>
 <script src="/app/web/js/jquery-ui.min.js"></script>
-<script src="/app/web/js/dynatree/jquery.dynatree.js"></script>
 
 </head>
 <style>
@@ -29,6 +23,7 @@ button {
 table {
 	width:600px;
 	border-collapse:collapse;
+	
 }
 th,td {
 	border:1px solid #cccccc;
@@ -46,18 +41,25 @@ th,td {
 <script>
 $(function(){
 	
-	$("#title").val( "제목입력" );
+//	$("#title").val( "제목입력" );
 	
 });
 
 function fn_submit () {
 	// ajax jquery coding
-	// trim() -> 앞뒤 공백 제거 , java , jsp
+	// trim() -> 앞뒤 공백 제거, java, jsp
+	// document.frm.title.value == ""
+	// $("#title").val() == ""
+	// $.trim("  aabbcc  ") ==> $.trim($("#title").val()) == ""
+	
 	if($.trim($("#title").val()) == "" ) {
 		alert("제목을 입력해주세요!");
+		// document.frm.title.focus();
 		$("#title").focus();
 		return false;
 	}
+	
+	// 앞,뒤 공백 제거
 	$("#title").val( $.trim($("#title").val()) );
 
 	if($.trim($("#pass").val()) == "" ) {
@@ -65,22 +67,28 @@ function fn_submit () {
 		$("#pass").focus();
 		return false;
 	}
+	
 	$("#pass").val( $.trim($("#pass").val()) );
 
 	var formData = $("#frm").serialize();
 	
-	// ajax:비동기 전송 방식의 기능을 가지고 있는 jquery의 함수
+	// ajax:비동기 전송 방식(깜빡 거림이 없음)의 기능을 가지고 있는 jquery의 함수
 	$.ajax({
+		/* 전송 전 세팅 */
 		type:"POST",
 		data:formData,
-		url:"boardWriteSave",
+		url:"boardModifySave",
 		dataType:"text",  // 리턴 타입
-		success: function(data) { // controller -> "ok","fail"
-			if(data == "ok"){
+
+		/* 전송 후 세팅 */
+		success: function(result) { // controller -> 1
+			if(result == "1"){
 				alert("저장완료");
 				location="boardList";
+			} else if(result == "-1"){
+				alert("암호가 일치하지 않습니다.");
 			} else {
-				alert("저장실패");
+				alert("저장실패\n관리자에게 연락해 주세요.");
 			}
 		},
 		error: function(){ // 장애 발생
@@ -92,32 +100,32 @@ function fn_submit () {
 </script>
 <body>
 <form id="frm">
+
+<input type="hidden" name="unq" value="${boardVO.unq }" >
+
 <table>
-	<caption>게시판 상세</caption>
+	<caption>게시판 수정 화면</caption>
 	<tr>
-		<th width="20%">제목</th>
-		<td width="80%">${boardVO.title }</td>
+		<th width="20%"><label for="title">제목</label></th>
+		<td width="80%"><input type="text" name="title" id="title" class="input1" value="${boardVO.title }"></td>
+		
+	</tr>
+	<tr>
+		<th><label for="pass">암호</label></th>
+		<td><input type="password" name="pass" id="pass"></td>
 	</tr>
 	<tr>
 		<th>글쓴이</th>
-		<td>${boardVO.name }</td>
+		<td><input type="text" name="name" id="name" value="${boardVO.name }"></td>
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td height="50">
-		<%-- ${content} --%>
-		${boardVO.content }
-		</td>
-	</tr>
-	<tr>
-		<th>등록일</th>
-		<td>${boardVO.rdate }</td>
+		<td><textarea name="content" id="content" class="textarea">${boardVO.content }</textarea></td>
 	</tr>
 	<tr>
 		<th colspan="2">
-		<button type="button" onclick="location='boardList'">목록</button>
-		<button type="button" onclick="location='boardModifyWrite?unq=${boardVO.unq}'">수정</button>
-		<button type="button" onclick="location='passWrite?unq=${boardVO.unq}'">삭제</button>
+		<button type="submit" onclick="fn_submit();return false;">저장</button>
+		<button type="reset">취소</button>
 		</th>
 	</tr>
 </table>

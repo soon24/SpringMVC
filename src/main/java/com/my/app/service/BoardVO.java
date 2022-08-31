@@ -1,7 +1,7 @@
 package com.my.app.service;
 
 public class BoardVO {
-	private int unq;
+	private String unq;
 	private String title;
 	private String pass;
 	private String name;
@@ -9,10 +9,10 @@ public class BoardVO {
 	private int hits;
 	private String rdate;
 	
-	public int getUnq() {
+	public String getUnq() {
 		return unq;
 	}
-	public void setUnq(int unq) {
+	public void setUnq(String unq) {
 		this.unq = unq;
 	}
 	public String getTitle() {

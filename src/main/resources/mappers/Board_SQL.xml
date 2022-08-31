@@ -44,5 +44,16 @@
 		UPDATE BOARD SET HITS = HITS + 1 WHERE UNQ = #{unq}
 	</update>
 	
+	<update id="updateBoard">
+		UPDATE BOARD SET 
+			TITLE = #{title},
+			NAME = #{name},
+			CONTENT = #{content}
+		WHERE UNQ = #{unq}
+	</update>
+
+	<select id="selectBoardPass" resultType="integer" parameterType="BoardVO">
+		SELECT COUNT(*) FROM BOARD WHERE UNQ = #{unq} AND PASS = #{pass}
+	</select>
 	
  </mapper>

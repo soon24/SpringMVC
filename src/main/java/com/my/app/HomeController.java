@@ -130,5 +130,29 @@ public class HomeController {
 		
 		return "board/boardDetail";
 	}
+	
+	@RequestMapping("/boardModifyWrite")
+	public String selectBoardModifyWrite(BoardVO vo, ModelMap model) throws Exception{
+		
+		BoardVO boardVO = boardDAOImpl.selectBoardDetail(vo.getUnq());
+		model.addAttribute("boardVO", boardVO);
+		
+		return "board/boardModifyWrite";
+	}
+	
+	@RequestMapping("/boardModifySave")
+	@ResponseBody
+	public String updateBoard(BoardVO vo) throws Exception {
+		
+		int result = 0;
+		
+		int count = boardDAOImpl.selectBoardPass(vo);
+		if(count == 1) {
+			result = boardDAOImpl.updateBoard(vo);
+		} else {
+			result = -1;
+		}
+		return result+""; // ajax jsp에 전송 시에는 반드시 String 형태로 return 해야됩니다.
+	}
 	 	
 }

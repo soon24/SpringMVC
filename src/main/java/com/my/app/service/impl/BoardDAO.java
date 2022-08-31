@@ -18,4 +18,8 @@ public interface BoardDAO {
 
 	public int updateBoardHits(String unq) throws Exception;
 	
+	public int updateBoard(BoardVO vo) throws Exception;
+	
+	public int selectBoardPass(BoardVO vo) throws Exception;
+	
 }
