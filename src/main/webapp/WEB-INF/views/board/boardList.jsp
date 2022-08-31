@@ -92,7 +92,7 @@ function fn_formSubmit(){
 				<c:out value="${searchVO.totRow-((searchVO.page-1)*searchVO.displayRowCount + status.index)}"/>					
 			</td>
 			<td align="left">
-				<a href="boardDetail.do?unq=${result.unq }"><c:out value="${result.title }"/></a>
+				<a href="boardDetail?unq=${result.unq }"><c:out value="${result.title }"/></a>
 			</td>
 			<td><c:out value="${result.name }" /></td>
 			<td><c:out value="${result.rdate }" /></td>

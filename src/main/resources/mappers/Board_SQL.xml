@@ -34,5 +34,15 @@
 						ORDER BY UNQ DESC) A) B
 					WHERE RN BETWEEN #{rowStart} AND #{rowEnd}						
 	</select>
+
+	<select id="selectBoardDetail" resultType="BoardVO" parameterType="String">
+		SELECT UNQ,TITLE,NAME,CONTENT,TO_CHAR(RDATE,'YYYY-MM-DD') RDATE FROM BOARD
+		WHERE UNQ=#{unq}
+	</select>
+	
+	<update id="updateBoardHits" parameterType="String">
+		UPDATE BOARD SET HITS = HITS + 1 WHERE UNQ = #{unq}
+	</update>
+	
 	
  </mapper>

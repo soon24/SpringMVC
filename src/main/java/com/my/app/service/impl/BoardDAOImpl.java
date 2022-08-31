@@ -73,6 +73,39 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("BoardSpace.selectBoardList", param);
 	}
 
+	@Override
+	public BoardVO selectBoardDetail(String param) throws Exception {
+		// TODO Auto-generated method stub
+		return (BoardVO) sqlSession.selectOne("BoardSpace.selectBoardDetail", param);
+	}
+
+	@Override
+	public int updateBoardHits(String unq) throws Exception {
+		// TODO Auto-generated method stub
+        int rtn_val =0;
+		
+		TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+		
+    	try { 
+    		rtn_val = sqlSession.update("BoardSpace.updateBoardHits", unq);
+    		
+    		if (rtn_val > 0){
+    			transactionManager.commit(status);
+    			return 1;	
+    		}else{
+    			transactionManager.rollback(status);
+    			return 9;
+    		}        		         		        		
+        }catch(Exception e){
+        	System.out.println(e.toString());
+          	transactionManager.rollback(status);                    
+            return 9;
+        }catch(Throwable e){
+        	System.out.println(e.toString());
+           	transactionManager.rollback(status);                    
+            return 9;
+        }
+	}
 }
 
 

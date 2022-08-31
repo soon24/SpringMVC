@@ -61,8 +61,6 @@ public class HomeController {
 	@RequestMapping(value = "/boardWriteSave",method = RequestMethod.POST)
 	public String insertBoard(HttpServletRequest request, Model model) {
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
 		int resCnt = 0;
 
 		String title = "";
@@ -115,6 +113,22 @@ public class HomeController {
 		model.addAttribute("listview", listview);
 		model.addAttribute("searchVO", searchVO);
 		return "board/boardList"; 
+	}
+	
+	@RequestMapping("/boardDetail")
+	public String selectBoardDetail(HttpServletRequest request, ModelMap model) throws Exception {
+		
+		String unq = request.getParameter("unq");
+		
+		boardDAOImpl.updateBoardHits(unq);
+		BoardVO boardVO = boardDAOImpl.selectBoardDetail(unq); 
+		String content = boardVO.getContent();
+		
+		// \n을 br tag로 변환
+		boardVO.setContent(content.replace("\n", "<br>"));
+		model.addAttribute("boardVO", boardVO);
+		
+		return "board/boardDetail";
 	}
 	 	
 }

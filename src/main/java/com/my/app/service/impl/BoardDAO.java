@@ -13,5 +13,9 @@ public interface BoardDAO {
 	public List<?> selectBoardList(SearchVO param) throws Exception;
 	
 	public int selectBoardTotal(SearchVO param) throws Exception;
+	
+	public BoardVO selectBoardDetail(String param) throws Exception;
 
+	public int updateBoardHits(String unq) throws Exception;
+	
 }
