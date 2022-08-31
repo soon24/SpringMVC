@@ -145,6 +145,16 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 		return resInt;
 	}
+
+	@Override
+	public int deleteBoard(BoardVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		int resInt = 0;
+		if (sqlSession.selectOne("BoardSpace.selectBoardPass", vo) != null) {
+			resInt = sqlSession.delete("BoardSpace.deleteBoard", vo);
+		}
+		return resInt;
+	}
 }
 
 

@@ -55,5 +55,10 @@
 	<select id="selectBoardPass" resultType="integer" parameterType="BoardVO">
 		SELECT COUNT(*) FROM BOARD WHERE UNQ = #{unq} AND PASS = #{pass}
 	</select>
+
+	<delete id="deleteBoard" parameterType="BoardVO">
+		DELETE FROM BOARD WHERE UNQ = #{unq} AND PASS = #{pass}
+	</delete>
+
 	
  </mapper>
