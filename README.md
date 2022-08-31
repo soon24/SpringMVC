@@ -104,7 +104,5 @@ Eclipse IDE에서 tomcat server path를  "/app" 로 등록하고 jquery path는 
     <img width="80%" src="https://github.com/soon24/SpringMVC/blob/main/docs/image/%EC%9D%B4%EB%AF%B8%EC%A7%80%20004.png?raw=true"> 
 </p>
 
-
-
-
-
+## 3.2. Test local 주소
+http://localhost:9080/app/boardList
